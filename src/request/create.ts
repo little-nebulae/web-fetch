@@ -1,4 +1,5 @@
 import type { HttpRequestMethod } from "@little-nebulae/http";
+import type { Result } from "@little-nebulae/result";
 
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
 import { fail, succeed } from "@little-nebulae/result";
@@ -13,7 +14,7 @@ export function createRequest({
   method?: HttpRequestMethod;
   headers?: Headers;
   body?: string;
-}) {
+}): Result<Request, UnexpectedError> {
   try {
     // oxlint-disable-next-line unicorn/no-invalid-fetch-options
     const request = new Request(url, { method, headers, body });
