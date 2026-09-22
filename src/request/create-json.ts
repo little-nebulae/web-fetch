@@ -1,6 +1,7 @@
 import type { UnexpectedError } from "@little-nebulae/error";
 import type { HttpRequestMethod } from "@little-nebulae/http";
 import type { Result } from "@little-nebulae/result";
+import type { ExtractLiteral } from "@little-nebulae/type-utils";
 import type { JSONType } from "zod";
 
 import { stringifyJsonValue } from "@little-nebulae/json";
@@ -14,7 +15,10 @@ export function createJsonRequest({
   body,
 }: {
   url: string | URL;
-  method: Extract<HttpRequestMethod, "POST" | "PUT" | "DELETE" | "PATCH">;
+  method: ExtractLiteral<
+    HttpRequestMethod,
+    "POST" | "PUT" | "DELETE" | "PATCH"
+  >;
   headers?: Headers;
   body: JSONType;
 }): Result<Request, UnexpectedError> {

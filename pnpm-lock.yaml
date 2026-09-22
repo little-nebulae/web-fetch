@@ -171,16 +171,19 @@ importers:
         version: 0.18.5
       '@little-nebulae/error':
         specifier: 1.1.0
-        version: 1.1.0(@little-nebulae/type-utils@1.1.0)
+        version: 1.1.0(@little-nebulae/type-utils@1.2.0)
       '@little-nebulae/http':
         specifier: 0.1.0
-        version: 0.1.0(@little-nebulae/type-utils@1.1.0)
+        version: 0.1.0(@little-nebulae/type-utils@1.2.0)
       '@little-nebulae/json':
         specifier: 0.1.0
-        version: 0.1.0(@little-nebulae/error@1.1.0(@little-nebulae/type-utils@1.1.0))(@little-nebulae/result@1.0.0)(zod@4.6.5)
+        version: 0.1.0(@little-nebulae/error@1.1.0(@little-nebulae/type-utils@1.2.0))(@little-nebulae/result@1.0.0)(zod@4.6.5)
       '@little-nebulae/result':
         specifier: 1.0.0
         version: 1.0.0
+      '@little-nebulae/type-utils':
+        specifier: 1.2.0
+        version: 1.2.0
       '@types/node':
         specifier: 26.6.2
         version: 26.6.2
@@ -410,8 +413,8 @@ packages:
   '@little-nebulae/result@1.0.0':
     resolution: {integrity: sha512-yetamyO3lwefhoXdemxPdjRLrI5yXJIm6ZwGi4KgiWKaQpfKi8myAuIjlzTkheUD/Z4hRnJmi/Sm9ovvCnxkqQ==}
 
-  '@little-nebulae/type-utils@1.1.0':
-    resolution: {integrity: sha512-5lP2hlwl1jWBCx5BMvr+7KbOf4//lcTUt74OeOymjyKTwkrrYcnss252otx/MjyvAwzYfoTeJUEC5WX/RLrsyw==}
+  '@little-nebulae/type-utils@1.2.0':
+    resolution: {integrity: sha512-dztj0ThTslqowbRd6XNQ5/Dz9WV+fYBvhCW3CjokXCmRQWvyrJNCU2sulACqyt1V7v8fjrjGcwCwaEQhGWM8hQ==}
 
   '@loaderkit/resolve@1.0.6':
     resolution: {integrity: sha512-G8FdIoF5CypfwmD9rl8BXod5HDn8JqB0CCNBXDTaRZ+yRYhARrrSToX1zg1zy9jX3zLqigsELwhT4gNtkdQAUg==}
@@ -1652,23 +1655,23 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@little-nebulae/error@1.1.0(@little-nebulae/type-utils@1.1.0)':
+  '@little-nebulae/error@1.1.0(@little-nebulae/type-utils@1.2.0)':
     dependencies:
-      '@little-nebulae/type-utils': 1.1.0
+      '@little-nebulae/type-utils': 1.2.0
 
-  '@little-nebulae/http@0.1.0(@little-nebulae/type-utils@1.1.0)':
+  '@little-nebulae/http@0.1.0(@little-nebulae/type-utils@1.2.0)':
     dependencies:
-      '@little-nebulae/type-utils': 1.1.0
+      '@little-nebulae/type-utils': 1.2.0
 
-  '@little-nebulae/json@0.1.0(@little-nebulae/error@1.1.0(@little-nebulae/type-utils@1.1.0))(@little-nebulae/result@1.0.0)(zod@4.6.5)':
+  '@little-nebulae/json@0.1.0(@little-nebulae/error@1.1.0(@little-nebulae/type-utils@1.2.0))(@little-nebulae/result@1.0.0)(zod@4.6.5)':
     dependencies:
-      '@little-nebulae/error': 1.1.0(@little-nebulae/type-utils@1.1.0)
+      '@little-nebulae/error': 1.1.0(@little-nebulae/type-utils@1.2.0)
       '@little-nebulae/result': 1.0.0
       zod: 4.6.5
 
   '@little-nebulae/result@1.0.0': {}
 
-  '@little-nebulae/type-utils@1.1.0': {}
+  '@little-nebulae/type-utils@1.2.0': {}
 
   '@loaderkit/resolve@1.0.6':
     dependencies:
