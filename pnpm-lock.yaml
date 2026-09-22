@@ -172,6 +172,9 @@ importers:
       '@little-nebulae/error':
         specifier: 1.1.0
         version: 1.1.0(@little-nebulae/type-utils@1.1.0)
+      '@little-nebulae/http':
+        specifier: 0.1.0
+        version: 0.1.0(@little-nebulae/type-utils@1.1.0)
       '@little-nebulae/json':
         specifier: 0.1.0
         version: 0.1.0(@little-nebulae/error@1.1.0(@little-nebulae/type-utils@1.1.0))(@little-nebulae/result@1.0.0)(zod@4.6.5)
@@ -391,6 +394,11 @@ packages:
     resolution: {integrity: sha512-yzlf2gHvHp311kChWsXp+H9XsrE2VG2uRDRLqgIybhAyanYuZvhDRA8ol3tSEaIFNDYUNwe6hDfIso/mOIv9Bg==}
     peerDependencies:
       '@little-nebulae/type-utils': ^1.1.0
+
+  '@little-nebulae/http@0.1.0':
+    resolution: {integrity: sha512-JBrySyy5RXkfSsdkWNq1K5h9K0goOaKvMgq7dwUAhYMLXyxO7l4VkfunNjLb2hi67aYXV3NsLh+CivCj+1pQPw==}
+    peerDependencies:
+      '@little-nebulae/type-utils': ^1.0.0
 
   '@little-nebulae/json@0.1.0':
     resolution: {integrity: sha512-0KANRngazKPEA6070nAL0r0cmbmN9l27kWkoljKUfCr5c8QeJeSYjEuzeCBJXTcT5c9UwQh523ZJvxSyGpz2vg==}
@@ -1645,6 +1653,10 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.6.0
 
   '@little-nebulae/error@1.1.0(@little-nebulae/type-utils@1.1.0)':
+    dependencies:
+      '@little-nebulae/type-utils': 1.1.0
+
+  '@little-nebulae/http@0.1.0(@little-nebulae/type-utils@1.1.0)':
     dependencies:
       '@little-nebulae/type-utils': 1.1.0
 
