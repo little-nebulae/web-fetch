@@ -4,6 +4,8 @@ import type { Result } from "@little-nebulae/result";
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
 import { attempt } from "@little-nebulae/result";
 
+import type { BodyInit } from "@/types";
+
 export function createRequest({
   url,
   ...init
@@ -11,7 +13,7 @@ export function createRequest({
   url: string | URL;
   method?: HttpRequestMethod;
   headers?: Headers;
-  body?: string;
+  body?: BodyInit;
 }): Result<Request, UnexpectedError> {
   return attempt({
     tryFn: () => new Request(url, init),
