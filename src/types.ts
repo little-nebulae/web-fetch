@@ -1,3 +1,3 @@
-import type { ExcludeExactly } from "type-fest";
+import type { ExcludeStrict } from "type-fest";
 
-export type BodyInit = ExcludeExactly<RequestInit["body"], undefined>;
+export type BodyInit = ExcludeStrict<RequestInit["body"], undefined>;
