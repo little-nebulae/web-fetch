@@ -8,3 +8,4 @@ export type HeadersInit = ExcludeStrict<
 >;
 export type HeaderEntries = [string, string][];
 export type HeaderRecord = ExcludeStrict<HeadersInit, HeaderEntries | Headers>;
+export type HeaderName = keyof HeaderRecord;

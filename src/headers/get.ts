@@ -1,11 +1,11 @@
-import type { HeaderRecord } from "@/types";
+import type { HeaderName } from "@/types";
 
 export function getHeader({
   headers,
   name,
 }: {
   headers: Headers;
-  name: keyof HeaderRecord;
+  name: HeaderName;
 }) {
   return headers.get(name);
 }
