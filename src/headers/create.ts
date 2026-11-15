@@ -1,8 +1,6 @@
-import type { HttpHeader } from "@little-nebulae/http";
+import type { HeaderRecord } from "@/types";
 
-export function createHeaders(init: {
-  [header in HttpHeader]: string;
-}): Headers {
-  const headers = new Headers(init);
+export function createHeaders(record: HeaderRecord): Headers {
+  const headers = new Headers(record);
   return headers;
 }
