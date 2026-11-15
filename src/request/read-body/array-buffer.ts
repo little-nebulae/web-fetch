@@ -3,6 +3,7 @@ import { HTTP_HEADER_ENUM } from "@little-nebulae/http";
 import { attemptAsync } from "@little-nebulae/result";
 
 import { WebBodyDecodingError } from "@/errors/body-decoding";
+import { WebBodySizeTooLargeError } from "@/errors/body-size-too-large";
 import { WebUsedBodyError } from "@/errors/used-body";
 
 export async function webReadArrayBufferRequestBody({
@@ -23,6 +24,9 @@ export async function webReadArrayBufferRequestBody({
             HTTP_HEADER_ENUM.CONTENT_ENCODING,
           ),
         });
+      }
+      if (error instanceof RangeError) {
+        return new WebBodySizeTooLargeError({ cause: error });
       }
       return new UnexpectedError({
         message: composeErrorMessage({
