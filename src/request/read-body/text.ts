@@ -5,7 +5,11 @@ import { attemptAsync } from "@little-nebulae/result";
 import { WebBodyDecodingError } from "@/errors/body-decoding";
 import { UsedRequestBodyError } from "@/errors/used-request-body";
 
-export async function readTextRequestBody({ request }: { request: Request }) {
+export async function webReadTextRequestBody({
+  request,
+}: {
+  request: Request;
+}) {
   return attemptAsync({
     tryFn: () => request.text(),
     catchFn: (error) => {
