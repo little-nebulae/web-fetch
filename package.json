@@ -28,14 +28,14 @@
   "devDependencies": {
     "@arethetypeswrong/core": "0.18.5",
     "@little-nebulae/error": "1.4.1",
-    "@little-nebulae/http": "0.2.0",
+    "@little-nebulae/http": "0.3.0",
     "@little-nebulae/json": "0.5.1",
     "@little-nebulae/result": "1.4.0",
     "@little-nebulae/utility-types": "0.4.0",
     "@types/node": "26.6.6",
     "oxfmt": "0.78.0",
     "oxlint": "1.93.0",
-    "oxlint-tsgolint": "7.0.2006",
+    "oxlint-tsgolint": "7.0.2007",
     "publint": "0.3.25",
     "tsdown": "0.23.7",
     "type-fest": "5.10.0",
@@ -55,12 +55,12 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "^12.0.0",
+      "version": "12.18.0",
       "onFail": "warn"
     },
     "runtime": {
       "name": "node",
-      "version": "^26.0.0",
+      "version": "26.13.1",
       "onFail": "warn"
     }
   }
