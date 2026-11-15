@@ -1,12 +1,12 @@
 import { BaseError } from "@little-nebulae/error";
 
-export class RequestBodyDecodingError extends BaseError<
-  "REQUEST_BODY_DECODING_ERROR",
+export class WebBodyDecodingError extends BaseError<
+  "WEB_BODY_DECODING_ERROR",
   TypeError,
   { contentEncoding: string | null }
 > {
-  readonly name = "RequestBodyDecodingError";
-  readonly code = "REQUEST_BODY_DECODING_ERROR";
+  readonly name = "WebBodyDecodingError";
+  readonly code = "WEB_BODY_DECODING_ERROR";
 
   constructor({
     message,
