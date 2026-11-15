@@ -3,7 +3,7 @@ import { HTTP_HEADER_ENUM } from "@little-nebulae/http";
 import { attemptAsync } from "@little-nebulae/result";
 
 import { WebBodyDecodingError } from "@/errors/body-decoding";
-import { UsedRequestBodyError } from "@/errors/used-request-body";
+import { WebUsedBodyError } from "@/errors/used-body";
 
 export async function webReadTextRequestBody({
   request,
@@ -15,7 +15,7 @@ export async function webReadTextRequestBody({
     catchFn: (error) => {
       if (error instanceof TypeError) {
         if (request.bodyUsed) {
-          return new UsedRequestBodyError({ cause: error });
+          return new WebUsedBodyError({ cause: error });
         }
         return new WebBodyDecodingError({
           cause: error,
