@@ -1,4 +1,5 @@
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
+import { HTTP_HEADER_ENUM } from "@little-nebulae/http";
 import { attemptAsync } from "@little-nebulae/result";
 
 import { WebBodyDecodingError } from "@/errors/body-decoding";
@@ -14,7 +15,9 @@ export async function readTextRequestBody({ request }: { request: Request }) {
         }
         return new WebBodyDecodingError({
           cause: error,
-          contentEncoding: request.headers.get("content-encoding"),
+          contentEncoding: request.headers.get(
+            HTTP_HEADER_ENUM.CONTENT_ENCODING,
+          ),
         });
       }
       return new UnexpectedError({
