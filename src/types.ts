@@ -6,3 +6,5 @@ export type HeadersInit = ExcludeStrict<
   ConstructorParameters<typeof Headers>[0],
   undefined
 >;
+export type HeaderEntries = [string, string][];
+export type HeaderRecord = ExcludeStrict<HeadersInit, HeaderEntries | Headers>;
