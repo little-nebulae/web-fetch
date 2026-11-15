@@ -6,7 +6,7 @@ import { attempt } from "@little-nebulae/result";
 
 import type { BodyInit, HeadersInit } from "@/types";
 
-export function createRequest({
+export function webCreateRequest({
   url,
   ...init
 }: {
