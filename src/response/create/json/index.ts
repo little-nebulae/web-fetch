@@ -25,11 +25,11 @@ export function webCreateJsonResponse({
   },
   JsonStringifyError<{ issues: $ZodIssue[] }> | UnexpectedError
 > {
-  const jsonParseResult = z.json().safeParse(inputs.body);
+  const jsonParseResult = z.json().safeParse(inputs.data);
 
   return attempt({
     tryFn: () => {
-      const response = Response.json(inputs.body, {
+      const response = Response.json(inputs.data, {
         status: HTTP_RESPONSE_STATUS_ENUM[inputs.status].CODE,
         statusText: HTTP_RESPONSE_STATUS_ENUM[inputs.status].TEXT,
         headers: inputs.headers ?? new Headers(),
@@ -43,16 +43,19 @@ export function webCreateJsonResponse({
       };
     },
     catchFn: (error) => {
+      const operation = "create a json web response";
       if (error instanceof TypeError && !jsonParseResult.success) {
         return new JsonStringifyError({
+          message: composeErrorMessage({
+            operation,
+            reason: "input data being invalid JSON",
+          }),
           cause: error,
           meta: { issues: jsonParseResult.error.issues },
         });
       }
       return new UnexpectedError({
-        message: composeErrorMessage({
-          operation: "create a json web response",
-        }),
+        message: composeErrorMessage({ operation }),
         cause: error,
         meta: null,
       });

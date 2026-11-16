@@ -56,7 +56,7 @@ export type CreateJsonResponseParams =
       isOk: true;
       inputs: {
         requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD" | "CONNECT">;
-        body: unknown;
+        data: unknown;
         status: keyof typeof HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM;
         headers?: HeadersInit;
       };
@@ -65,7 +65,7 @@ export type CreateJsonResponseParams =
       isOk: false;
       inputs: {
         requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD">;
-        body: unknown;
+        data: unknown;
         status: keyof typeof HTTP_ERROR_RESPONSE_STATUS_ENUM;
         headers?: HeadersInit;
       };
