@@ -9,5 +9,5 @@ export function setHeader({
   name: HeaderName;
   value: string;
 }) {
-  return headers.set(name, value);
+  headers.set(name, value);
 }
