@@ -193,6 +193,9 @@ importers:
       '@little-nebulae/utility-types':
         specifier: 0.4.0
         version: 0.4.0(type-fest@5.10.0)
+      '@little-nebulae/zod':
+        specifier: 0.6.0
+        version: 0.6.0(@little-nebulae/error@1.4.1(type-fest@5.10.0))(@little-nebulae/result@1.4.0)(type-fest@5.10.0)(zod@4.6.7)
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
