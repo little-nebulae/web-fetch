@@ -10,7 +10,7 @@ import { z } from "zod";
 
 import type { CreateJsonResponseParams } from "@/response/create/types";
 
-export function webCreateJsonResponse({
+export function webCreateLosslessJsonResponse({
   inputs,
 }: CreateJsonResponseParams): Result<
   Response,
