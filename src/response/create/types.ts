@@ -50,3 +50,23 @@ export type CreateResponseParams =
             headers?: HeadersInit;
           };
     };
+
+export type CreateJsonResponseParams =
+  | {
+      isOk: true;
+      inputs: {
+        requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD" | "CONNECT">;
+        body: unknown;
+        status: keyof typeof HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM;
+        headers?: HeadersInit;
+      };
+    }
+  | {
+      isOk: false;
+      inputs: {
+        requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD">;
+        body: unknown;
+        status: keyof typeof HTTP_ERROR_RESPONSE_STATUS_ENUM;
+        headers?: HeadersInit;
+      };
+    };
