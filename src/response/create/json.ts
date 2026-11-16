@@ -4,13 +4,13 @@ import type {
   HttpRequestMethod,
 } from "@little-nebulae/http";
 import type { ExcludeFrom } from "@little-nebulae/utility-types";
-import type { JsonValue } from "type-fest";
+import type { Except, JsonValue } from "type-fest";
 
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
 import { HTTP_RESPONSE_STATUS_ENUM } from "@little-nebulae/http";
 import { attempt } from "@little-nebulae/result";
 
-import type { HeadersInit } from "@/types";
+import type { HeaderRecord } from "@/types";
 
 type CreateJsonResponseParams =
   | {
@@ -19,7 +19,7 @@ type CreateJsonResponseParams =
         requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD" | "CONNECT">;
         data: JsonValue;
         status: keyof typeof HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM;
-        headers?: HeadersInit;
+        headers?: Except<HeaderRecord, "Content-Type">;
       };
     }
   | {
@@ -28,7 +28,7 @@ type CreateJsonResponseParams =
         requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD">;
         data: JsonValue;
         status: keyof typeof HTTP_ERROR_RESPONSE_STATUS_ENUM;
-        headers?: HeadersInit;
+        headers?: Except<HeaderRecord, "Content-Type">;
       };
     };
 
