@@ -3,27 +3,41 @@ import type { ExtractFrom } from "@little-nebulae/utility-types";
 import type { Except, JsonValue } from "type-fest";
 
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
+import { HTTP_APPLICATION_MEDIA_TYPE_ENUM } from "@little-nebulae/http";
 import { DEFAULT_JSON_STRINGIFY_SPACE } from "@little-nebulae/json";
 import { attempt } from "@little-nebulae/result";
 
-interface CreateJsonRequestParams extends Except<RequestInit, "body"> {
+import type { HeaderRecord } from "@/types";
+
+import { createHeaders } from "@/headers/create";
+
+interface CreateJsonRequestParams extends Except<
+  RequestInit,
+  "body" | "headers"
+> {
   method: ExtractFrom<
     HttpRequestMethod,
     "GET" | "PATCH" | "POST" | "PUT" | "QUERY"
   >;
   input: string | URL;
   data: JsonValue;
+  headers: Except<HeaderRecord, "Content-Type">;
 }
 
 export function webCreateJsonRequest({
   input,
   data,
+  headers,
   ...init
 }: CreateJsonRequestParams) {
   return attempt({
     tryFn: () =>
       new Request(input, {
         body: JSON.stringify(data, null, DEFAULT_JSON_STRINGIFY_SPACE),
+        headers: createHeaders({
+          "Content-Type": HTTP_APPLICATION_MEDIA_TYPE_ENUM.JSON,
+          ...headers,
+        }),
         ...init,
       }),
     catchFn: (error) =>
