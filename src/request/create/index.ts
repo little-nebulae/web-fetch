@@ -7,7 +7,7 @@ import { attempt } from "@little-nebulae/result";
 
 import type { BodyInit, RequestInfo } from "@/types";
 
-interface RequestInitWithBody extends Except<RequestInit, "body"> {
+interface CreateRequestParamsWithBody extends Except<RequestInit, "body"> {
   input: RequestInfo;
   method: ExtractFrom<
     HttpRequestMethod,
@@ -15,14 +15,16 @@ interface RequestInitWithBody extends Except<RequestInit, "body"> {
   >;
   body: BodyInit;
 }
-interface RequestInitWithNoBody extends Except<RequestInit, "body"> {
+interface CreateRequestParamsWithNoBody extends Except<RequestInit, "body"> {
   input: RequestInfo;
   method: ExtractFrom<
     HttpRequestMethod,
     "CONNECT" | "DELETE" | "HEAD" | "OPTIONS" | "TRACE"
   >;
 }
-type CreateRequestParams = RequestInitWithBody | RequestInitWithNoBody;
+type CreateRequestParams =
+  | CreateRequestParamsWithBody
+  | CreateRequestParamsWithNoBody;
 
 export function webCreateRequest({ input, ...init }: CreateRequestParams) {
   return attempt({
