@@ -5,28 +5,28 @@ import { attemptAsync } from "@little-nebulae/result";
 import { WebBodyDecodingError } from "@/errors/body-decoding";
 import { WebUsedBodyError } from "@/errors/used-body";
 
-export async function webReadBlobRequestBody({
-  request,
+export async function webReadBlobResponseBody({
+  response,
 }: {
-  request: Request;
+  response: Response;
 }) {
   return attemptAsync({
-    tryFn: () => request.blob(),
+    tryFn: () => response.blob(),
     catchFn: (error) => {
       if (error instanceof TypeError) {
-        if (request.bodyUsed) {
+        if (response.bodyUsed) {
           return new WebUsedBodyError({ cause: error });
         }
         return new WebBodyDecodingError({
           cause: error,
-          contentEncoding: request.headers.get(
+          contentEncoding: response.headers.get(
             HTTP_HEADER_ENUM.CONTENT_ENCODING,
           ),
         });
       }
       return new UnexpectedError({
         message: composeErrorMessage({
-          operation: "read blob request body",
+          operation: "read blob response body",
         }),
         cause: error,
         meta: null,
