@@ -5,7 +5,7 @@ import type { Except } from "type-fest";
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
 import { attempt } from "@little-nebulae/result";
 
-import type { RequestInput } from "@/types";
+import type { HeaderRecord, RequestInput } from "@/types";
 
 interface CreateRequestParamsWithBody extends Except<RequestInit, "body"> {
   input: RequestInput;
@@ -14,6 +14,7 @@ interface CreateRequestParamsWithBody extends Except<RequestInit, "body"> {
     "GET" | "PATCH" | "POST" | "PUT" | "QUERY"
   >;
   body: BodyInit;
+  headers?: HeaderRecord;
 }
 interface CreateRequestParamsWithNoBody extends Except<RequestInit, "body"> {
   input: RequestInput;
@@ -21,6 +22,7 @@ interface CreateRequestParamsWithNoBody extends Except<RequestInit, "body"> {
     HttpRequestMethod,
     "CONNECT" | "DELETE" | "HEAD" | "OPTIONS" | "TRACE"
   >;
+  headers?: HeaderRecord;
 }
 type CreateRequestParams =
   | CreateRequestParamsWithBody
