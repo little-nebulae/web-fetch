@@ -21,7 +21,7 @@ interface CreateJsonRequestParams extends Except<
   >;
   input: string | URL;
   data: JsonValue;
-  headers: Except<HeaderRecord, "Content-Type">;
+  headers: Except<HeaderRecord, "content-type">;
 }
 
 export function webCreateJsonRequest({
@@ -35,7 +35,7 @@ export function webCreateJsonRequest({
       new Request(input, {
         body: JSON.stringify(data, null, DEFAULT_JSON_STRINGIFY_SPACE),
         headers: createHeaders({
-          "Content-Type": HTTP_APPLICATION_MEDIA_TYPE_ENUM.JSON,
+          "content-type": HTTP_APPLICATION_MEDIA_TYPE_ENUM.JSON,
           ...headers,
         }),
         ...init,
