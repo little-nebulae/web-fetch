@@ -5,4 +5,4 @@ export type HeaderRecord = Partial<Record<HttpHeader, string>>;
 
 export type RequestInput = ConstructorParameters<typeof Request>[0];
 
-export type WebBodyInit = NonNullable<RequestInit["body"]>;
+export type NonNullableBodyInit = NonNullable<RequestInit["body"]>;
