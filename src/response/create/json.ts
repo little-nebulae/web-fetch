@@ -19,7 +19,7 @@ type CreateJsonResponseParams =
         requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD" | "CONNECT">;
         data: JsonValue;
         status: keyof typeof HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM;
-        headers?: Except<HeaderRecord, "Content-Type">;
+        headers?: Except<HeaderRecord, "content-type">;
       };
     }
   | {
@@ -28,7 +28,7 @@ type CreateJsonResponseParams =
         requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD">;
         data: JsonValue;
         status: keyof typeof HTTP_ERROR_RESPONSE_STATUS_ENUM;
-        headers?: Except<HeaderRecord, "Content-Type">;
+        headers?: Except<HeaderRecord, "content-type">;
       };
     };
 
