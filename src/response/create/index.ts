@@ -9,7 +9,7 @@ import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
 import { HTTP_RESPONSE_STATUS_ENUM } from "@little-nebulae/http";
 import { attempt } from "@little-nebulae/result";
 
-import type { HeaderRecord } from "@/types";
+import type { HeaderRecord, WebBodyInit } from "@/types";
 
 type CreateResponseParams =
   | {
@@ -20,7 +20,7 @@ type CreateResponseParams =
               HttpRequestMethod,
               "GET" | "QUERY" | "POST" | "TRACE"
             >;
-            body: BodyInit;
+            body: WebBodyInit;
             status: keyof typeof HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM;
             headers?: HeaderRecord;
           }
@@ -29,7 +29,7 @@ type CreateResponseParams =
               HttpRequestMethod,
               "PUT" | "PATCH" | "DELETE" | "OPTIONS"
             >;
-            body?: BodyInit;
+            body?: WebBodyInit;
             status: keyof typeof HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM;
             headers?: HeaderRecord;
           }
@@ -49,7 +49,7 @@ type CreateResponseParams =
           }
         | {
             requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD">;
-            body: BodyInit;
+            body: WebBodyInit;
             status: keyof typeof HTTP_ERROR_RESPONSE_STATUS_ENUM;
             headers?: HeaderRecord;
           };
