@@ -32,7 +32,6 @@
     "@little-nebulae/json": "0.6.0",
     "@little-nebulae/result": "1.4.0",
     "@little-nebulae/utility-types": "0.4.0",
-    "@types/node": "26.6.6",
     "oxfmt": "0.78.0",
     "oxlint": "1.93.0",
     "oxlint-tsgolint": "7.0.2007",

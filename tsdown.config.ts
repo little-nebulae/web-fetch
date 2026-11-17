@@ -2,7 +2,7 @@ import { defineConfig } from "tsdown";
 
 export default defineConfig({
   // Build options
-  platform: "neutral",
+  platform: "browser",
   exports: true,
   dts: true,
   // Lint options
