@@ -14,31 +14,29 @@ import type { HeaderRecord } from "@/types";
 
 type CreateJsonResponseParams =
   | {
-      isOk: true;
-      inputs: {
-        requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD" | "CONNECT">;
-        data: JsonValue;
-        status: keyof typeof HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM;
-        headers?: Except<HeaderRecord, "content-type">;
-      };
+      requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD" | "CONNECT">;
+      data: JsonValue;
+      status: keyof typeof HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM;
+      headers?: Except<HeaderRecord, "content-type">;
     }
   | {
-      isOk: false;
-      inputs: {
-        requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD">;
-        data: JsonValue;
-        status: keyof typeof HTTP_ERROR_RESPONSE_STATUS_ENUM;
-        headers?: Except<HeaderRecord, "content-type">;
-      };
+      requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD">;
+      data: JsonValue;
+      status: keyof typeof HTTP_ERROR_RESPONSE_STATUS_ENUM;
+      headers?: Except<HeaderRecord, "content-type">;
     };
 
-export function webCreateJsonResponse({ inputs }: CreateJsonResponseParams) {
+export function webCreateJsonResponse({
+  data,
+  status,
+  headers,
+}: CreateJsonResponseParams) {
   return attempt({
     tryFn: () =>
-      Response.json(inputs.data, {
-        status: HTTP_RESPONSE_STATUS_ENUM[inputs.status].CODE,
-        statusText: HTTP_RESPONSE_STATUS_ENUM[inputs.status].TEXT,
-        headers: inputs.headers ?? new Headers(),
+      Response.json(data, {
+        status: HTTP_RESPONSE_STATUS_ENUM[status].CODE,
+        statusText: HTTP_RESPONSE_STATUS_ENUM[status].TEXT,
+        headers: headers ?? new Headers(),
       }),
     catchFn: (error) =>
       new UnexpectedError({
