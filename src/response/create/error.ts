@@ -17,7 +17,7 @@ export function webCreateErrorResponse({
   message: string;
   meta: JsonValue;
   status: keyof typeof HTTP_ERROR_RESPONSE_STATUS_ENUM;
-  headers?: Except<HeaderRecord, "Content-Type">;
+  headers?: Except<HeaderRecord, "content-type">;
 }) {
   return attempt({
     tryFn: () =>
