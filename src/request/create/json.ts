@@ -11,17 +11,14 @@ import type { HeaderRecord } from "@/types";
 
 import { createHeaders } from "@/headers/create";
 
-interface CreateJsonRequestParams extends Except<
-  RequestInit,
-  "body" | "headers"
-> {
+interface CreateJsonRequestParams extends Except<RequestInit, "body"> {
   method: ExtractFrom<
     HttpRequestMethod,
     "GET" | "PATCH" | "POST" | "PUT" | "QUERY"
   >;
   input: string | URL;
   data: JsonValue;
-  headers: Except<HeaderRecord, "content-type">;
+  headers?: Except<HeaderRecord, "content-type">;
 }
 
 export function webCreateJsonRequest({
