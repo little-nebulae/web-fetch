@@ -1,11 +1,11 @@
-import type { HeaderName } from "@/types";
+import type { HttpHeader } from "@little-nebulae/http";
 
 export function getHeader({
   headers,
   name,
 }: {
   headers: Headers;
-  name: HeaderName;
+  name: HttpHeader;
 }) {
   return headers.get(name);
 }

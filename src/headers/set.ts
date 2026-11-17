@@ -1,4 +1,4 @@
-import type { HeaderName } from "@/types";
+import type { HttpHeader } from "@little-nebulae/http";
 
 export function setHeader({
   headers,
@@ -6,7 +6,7 @@ export function setHeader({
   value,
 }: {
   headers: Headers;
-  name: HeaderName;
+  name: HttpHeader;
   value: string;
 }) {
   headers.set(name, value);
