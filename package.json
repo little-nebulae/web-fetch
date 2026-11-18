@@ -27,17 +27,17 @@
   },
   "devDependencies": {
     "@arethetypeswrong/core": "0.18.5",
-    "@little-nebulae/error": "1.4.1",
-    "@little-nebulae/http": "0.4.0",
-    "@little-nebulae/json": "0.6.0",
-    "@little-nebulae/result": "1.4.0",
-    "@little-nebulae/utility-types": "0.4.0",
-    "oxfmt": "0.78.0",
-    "oxlint": "1.93.0",
+    "@little-nebulae/error": "1.5.0",
+    "@little-nebulae/http": "0.5.0",
+    "@little-nebulae/json": "0.7.0",
+    "@little-nebulae/result": "1.5.0",
+    "@little-nebulae/utility-types": "0.5.0",
+    "oxfmt": "0.79.0",
+    "oxlint": "1.94.0",
     "oxlint-tsgolint": "7.0.2007",
     "publint": "0.3.25",
     "tsdown": "0.23.7",
-    "type-fest": "5.10.0",
+    "type-fest": "6.0.1",
     "typescript": "7.1.0-beta",
     "vitest": "5.1.0"
   },
@@ -47,7 +47,7 @@
     "@little-nebulae/json": "0",
     "@little-nebulae/result": "^1.0.0",
     "@little-nebulae/utility-types": "0",
-    "type-fest": "^5.0.0"
+    "type-fest": "^6.0.0"
   },
   "devEngines": {
     "packageManager": {
