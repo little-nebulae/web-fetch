@@ -6,9 +6,7 @@ import type {
 import type { ExcludeFrom } from "@little-nebulae/utility-types";
 import type { Except, JsonValue } from "type-fest";
 
-import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
 import { HTTP_RESPONSE_STATUS_ENUM } from "@little-nebulae/http";
-import { attempt } from "@little-nebulae/result";
 
 import type { HeaderRecord } from "@/types";
 
@@ -31,20 +29,9 @@ export function webCreateJsonResponse({
   status,
   headers,
 }: CreateJsonResponseParams) {
-  return attempt({
-    tryFn: () =>
-      Response.json(data, {
-        status: HTTP_RESPONSE_STATUS_ENUM[status].CODE,
-        statusText: HTTP_RESPONSE_STATUS_ENUM[status].TEXT,
-        headers: headers ?? new Headers(),
-      }),
-    catchFn: (error) =>
-      new UnexpectedError({
-        message: composeErrorMessage({
-          operation: "create a json web response",
-        }),
-        cause: error,
-        meta: null,
-      }),
+  return Response.json(data, {
+    status: HTTP_RESPONSE_STATUS_ENUM[status].CODE,
+    statusText: HTTP_RESPONSE_STATUS_ENUM[status].TEXT,
+    headers: headers ?? new Headers(),
   });
 }
