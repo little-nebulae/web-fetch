@@ -1,10 +1,12 @@
-import type { HttpRequestMethod } from "@little-nebulae/http";
-import type { ExtractFrom } from "@little-nebulae/utility-types";
+import type {
+  HttpRequestMethodThatAllowsBodyInRequest,
+  HttpRequestMethodThatRequiresBodyInRequest,
+} from "@little-nebulae/http";
 import type { Except, JsonValue } from "type-fest";
 
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
 import { HTTP_APPLICATION_MEDIA_TYPE_ENUM } from "@little-nebulae/http";
-import { DEFAULT_JSON_STRINGIFY_SPACE } from "@little-nebulae/json";
+import { jsonStringifyLosslessValue } from "@little-nebulae/json";
 import { attempt } from "@little-nebulae/result";
 
 import type { HeaderRecord } from "@/types";
@@ -12,10 +14,9 @@ import type { HeaderRecord } from "@/types";
 import { createHeaders } from "@/headers/create";
 
 interface CreateJsonRequestParams extends Except<RequestInit, "body"> {
-  method: ExtractFrom<
-    HttpRequestMethod,
-    "GET" | "PATCH" | "POST" | "PUT" | "QUERY"
-  >;
+  method:
+    | HttpRequestMethodThatRequiresBodyInRequest
+    | HttpRequestMethodThatAllowsBodyInRequest;
   input: string | URL;
   data: JsonValue;
   headers?: Except<HeaderRecord, "content-type">;
@@ -30,7 +31,7 @@ export function webCreateJsonRequest({
   return attempt({
     tryFn: () =>
       new Request(input, {
-        body: JSON.stringify(data, null, DEFAULT_JSON_STRINGIFY_SPACE),
+        body: jsonStringifyLosslessValue({ value: data }),
         headers: createHeaders({
           "content-type": HTTP_APPLICATION_MEDIA_TYPE_ENUM.JSON,
           ...headers,
