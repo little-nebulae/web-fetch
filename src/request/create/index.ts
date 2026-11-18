@@ -1,5 +1,8 @@
-import type { HttpRequestMethod } from "@little-nebulae/http";
-import type { ExtractFrom } from "@little-nebulae/utility-types";
+import type {
+  HttpRequestMethodThatAllowsBodyInRequest,
+  HttpRequestMethodThatForbidsBodyInRequest,
+  HttpRequestMethodThatRequiresBodyInRequest,
+} from "@little-nebulae/http";
 import type { Except } from "type-fest";
 
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
@@ -9,23 +12,27 @@ import type { HeaderRecord, RequestInput, NonNullableBodyInit } from "@/types";
 
 interface CreateRequestParamsWithBody extends Except<RequestInit, "body"> {
   input: RequestInput;
-  method: ExtractFrom<
-    HttpRequestMethod,
-    "GET" | "PATCH" | "POST" | "PUT" | "QUERY"
-  >;
+  method: HttpRequestMethodThatRequiresBodyInRequest;
   body: NonNullableBodyInit;
+  headers?: HeaderRecord;
+}
+interface CreateRequestParamsWithOptionalBody extends Except<
+  RequestInit,
+  "body"
+> {
+  input: RequestInput;
+  method: HttpRequestMethodThatAllowsBodyInRequest;
+  body?: NonNullableBodyInit;
   headers?: HeaderRecord;
 }
 interface CreateRequestParamsWithNoBody extends Except<RequestInit, "body"> {
   input: RequestInput;
-  method: ExtractFrom<
-    HttpRequestMethod,
-    "CONNECT" | "DELETE" | "HEAD" | "OPTIONS" | "TRACE"
-  >;
+  method: HttpRequestMethodThatForbidsBodyInRequest;
   headers?: HeaderRecord;
 }
 type CreateRequestParams =
   | CreateRequestParamsWithBody
+  | CreateRequestParamsWithOptionalBody
   | CreateRequestParamsWithNoBody;
 
 export function webCreateRequest({ input, ...init }: CreateRequestParams) {
