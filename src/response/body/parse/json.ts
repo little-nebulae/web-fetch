@@ -1,7 +1,6 @@
-import type { UnexpectedError } from "@little-nebulae/error";
 import type { AsyncResult } from "@little-nebulae/result";
 
-import { composeErrorMessage } from "@little-nebulae/error";
+import { UnexpectedError, composeErrorMessage } from "@little-nebulae/error";
 import { JsonParseError, jsonParse } from "@little-nebulae/json";
 import { fail } from "@little-nebulae/result";
 
@@ -19,7 +18,7 @@ export async function webParseJsonResponseBody<T = unknown>({
   | WebUsedBodyError
   | WebBodyDecodingError
   | JsonParseError<{ text: string }>
-  | UnexpectedError
+  | UnexpectedError<unknown, null | { text: string }>
 > {
   const readTextResult = await webReadTextResponseBody({ response });
   if (!readTextResult.success) {
@@ -31,13 +30,24 @@ export async function webParseJsonResponseBody<T = unknown>({
   if (jsonParseResult.success) {
     return jsonParseResult;
   }
-  return fail(
-    new JsonParseError({
-      message: composeErrorMessage({
-        operation: "parse response body text",
-        reason: "the text being invalid JSON",
+  const operation = "parse JSON response body";
+  const jsonParseError = jsonParseResult.error;
+  if (jsonParseError.code === "JSON_PARSE_ERROR") {
+    return fail(
+      new JsonParseError({
+        message: composeErrorMessage({
+          operation,
+          reason: "the text being invalid JSON",
+        }),
+        cause: jsonParseError.cause,
+        meta: { text },
       }),
-      cause: jsonParseResult.error.cause,
+    );
+  }
+  return fail(
+    new UnexpectedError({
+      message: composeErrorMessage({ operation }),
+      cause: jsonParseError.cause,
       meta: { text },
     }),
   );
