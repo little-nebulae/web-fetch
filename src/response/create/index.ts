@@ -2,8 +2,12 @@ import type {
   HTTP_ERROR_RESPONSE_STATUS_ENUM,
   HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM,
   HttpRequestMethod,
+  HttpRequestMethodThatAllowsBodyInSuccessfulResponse,
+  HttpRequestMethodThatForbidsBodyInErrorResponse,
+  HttpRequestMethodThatForbidsBodyInSuccessfulResponse,
+  HttpRequestMethodThatRequiresBodyInSuccessfulResponse,
 } from "@little-nebulae/http";
-import type { ExcludeFrom, ExtractFrom } from "@little-nebulae/utility-types";
+import type { ExcludeStrict } from "type-fest";
 
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
 import { HTTP_RESPONSE_STATUS_ENUM } from "@little-nebulae/http";
@@ -16,25 +20,19 @@ type CreateResponseParams =
       isOk: true;
       inputs:
         | {
-            requestMethod: ExtractFrom<
-              HttpRequestMethod,
-              "GET" | "QUERY" | "POST" | "TRACE"
-            >;
+            requestMethod: HttpRequestMethodThatRequiresBodyInSuccessfulResponse;
             body: NonNullableBodyInit;
             status: keyof typeof HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM;
             headers?: HeaderRecord;
           }
         | {
-            requestMethod: ExtractFrom<
-              HttpRequestMethod,
-              "PUT" | "PATCH" | "DELETE" | "OPTIONS"
-            >;
+            requestMethod: HttpRequestMethodThatAllowsBodyInSuccessfulResponse;
             body?: NonNullableBodyInit;
             status: keyof typeof HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM;
             headers?: HeaderRecord;
           }
         | {
-            requestMethod: ExtractFrom<HttpRequestMethod, "HEAD" | "CONNECT">;
+            requestMethod: HttpRequestMethodThatForbidsBodyInSuccessfulResponse;
             status: keyof typeof HTTP_SUCCESSFUL_RESPONSE_STATUS_ENUM;
             headers?: HeaderRecord;
           };
@@ -43,12 +41,15 @@ type CreateResponseParams =
       isOk: false;
       inputs:
         | {
-            requestMethod: ExtractFrom<HttpRequestMethod, "HEAD">;
+            requestMethod: HttpRequestMethodThatForbidsBodyInErrorResponse;
             status: keyof typeof HTTP_ERROR_RESPONSE_STATUS_ENUM;
             headers?: HeaderRecord;
           }
         | {
-            requestMethod: ExcludeFrom<HttpRequestMethod, "HEAD">;
+            requestMethod: ExcludeStrict<
+              HttpRequestMethod,
+              HttpRequestMethodThatForbidsBodyInErrorResponse
+            >;
             body: NonNullableBodyInit;
             status: keyof typeof HTTP_ERROR_RESPONSE_STATUS_ENUM;
             headers?: HeaderRecord;
