@@ -186,10 +186,10 @@ importers:
         version: 0.5.0(@little-nebulae/utility-types@0.5.0(type-fest@6.0.1))(type-fest@6.0.1)
       '@little-nebulae/json':
         specifier: 0.7.0
-        version: 0.7.0(@little-nebulae/error@1.5.0(type-fest@6.0.1))(@little-nebulae/result@1.5.0)(type-fest@6.0.1)
+        version: 0.7.0(@little-nebulae/error@1.5.0(type-fest@6.0.1))(@little-nebulae/result@1.6.0(@little-nebulae/error@1.5.0(type-fest@6.0.1))(type-fest@6.0.1))(type-fest@6.0.1)
       '@little-nebulae/result':
-        specifier: 1.5.0
-        version: 1.5.0
+        specifier: 1.6.0
+        version: 1.6.0(@little-nebulae/error@1.5.0(type-fest@6.0.1))(type-fest@6.0.1)
       '@little-nebulae/utility-types':
         specifier: 0.5.0
         version: 0.5.0(type-fest@6.0.1)
@@ -267,8 +267,11 @@ packages:
       '@little-nebulae/result': ^1.0.0
       type-fest: ^6.0.0
 
-  '@little-nebulae/result@1.5.0':
-    resolution: {integrity: sha512-y2lqcr0Vsd/GfMqbRqzFXLUzSsVTLGDyVEJlLsRXNWYetyBTkU4SopamByzVlfaKS+s6m9DE3IbUNIwNNTaceQ==}
+  '@little-nebulae/result@1.6.0':
+    resolution: {integrity: sha512-XPO/OPeUv+V3c7Hi3/UttF7sojb+e2SGRezshAqPDXbWezS9gkaYrP+RlGS4pe6v/zPgE5TbSgiczR+ixw/n/g==}
+    peerDependencies:
+      '@little-nebulae/error': ^1.0.0
+      type-fest: ^6.0.0
 
   '@little-nebulae/utility-types@0.5.0':
     resolution: {integrity: sha512-kWzZzvGFqA99Tkd73HAF3gNwKSWT21XmnUPC1rpnE53Q9TyfiSkuLYCWBc6csashNmozw/r03BDCxs4SCt38YQ==}
@@ -1466,13 +1469,16 @@ snapshots:
       '@little-nebulae/utility-types': 0.5.0(type-fest@6.0.1)
       type-fest: 6.0.1
 
-  '@little-nebulae/json@0.7.0(@little-nebulae/error@1.5.0(type-fest@6.0.1))(@little-nebulae/result@1.5.0)(type-fest@6.0.1)':
+  '@little-nebulae/json@0.7.0(@little-nebulae/error@1.5.0(type-fest@6.0.1))(@little-nebulae/result@1.6.0(@little-nebulae/error@1.5.0(type-fest@6.0.1))(type-fest@6.0.1))(type-fest@6.0.1)':
     dependencies:
       '@little-nebulae/error': 1.5.0(type-fest@6.0.1)
-      '@little-nebulae/result': 1.5.0
+      '@little-nebulae/result': 1.6.0(@little-nebulae/error@1.5.0(type-fest@6.0.1))(type-fest@6.0.1)
       type-fest: 6.0.1
 
-  '@little-nebulae/result@1.5.0': {}
+  '@little-nebulae/result@1.6.0(@little-nebulae/error@1.5.0(type-fest@6.0.1))(type-fest@6.0.1)':
+    dependencies:
+      '@little-nebulae/error': 1.5.0(type-fest@6.0.1)
+      type-fest: 6.0.1
 
   '@little-nebulae/utility-types@0.5.0(type-fest@6.0.1)':
     dependencies:
