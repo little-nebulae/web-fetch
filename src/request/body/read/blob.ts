@@ -1,6 +1,6 @@
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
 import { HTTP_HEADER_ENUM } from "@little-nebulae/http";
-import { attemptAsync } from "@little-nebulae/result";
+import { produceAsyncResult } from "@little-nebulae/result";
 
 import { WebBodyDecodingError } from "@/errors/body-decoding";
 import { WebUsedBodyError } from "@/errors/used-body";
@@ -10,7 +10,7 @@ export async function webReadBlobRequestBody({
 }: {
   request: Request;
 }) {
-  return attemptAsync({
+  return produceAsyncResult({
     tryFn: () => request.blob(),
     catchFn: (error) => {
       if (error instanceof TypeError) {
