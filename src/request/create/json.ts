@@ -7,7 +7,7 @@ import type { Except, JsonValue } from "type-fest";
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
 import { HTTP_APPLICATION_MEDIA_TYPE_ENUM } from "@little-nebulae/http";
 import { jsonStringifyLosslessValue } from "@little-nebulae/json";
-import { attempt } from "@little-nebulae/result";
+import { produceResult } from "@little-nebulae/result";
 
 import type { HeaderRecord } from "@/types";
 
@@ -28,7 +28,7 @@ export function webCreateJsonRequest({
   headers,
   ...init
 }: CreateJsonRequestParams) {
-  return attempt({
+  return produceResult({
     tryFn: () =>
       new Request(input, {
         body: jsonStringifyLosslessValue({ value: data }),

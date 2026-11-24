@@ -6,7 +6,7 @@ import type {
 import type { Except } from "type-fest";
 
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
-import { attempt } from "@little-nebulae/result";
+import { produceResult } from "@little-nebulae/result";
 
 import type { HeaderRecord, RequestInput, NonNullableBodyInit } from "@/types";
 
@@ -36,7 +36,7 @@ type CreateRequestParams =
   | CreateRequestParamsWithNoBody;
 
 export function webCreateRequest({ input, ...init }: CreateRequestParams) {
-  return attempt({
+  return produceResult({
     tryFn: () => new Request(input, init),
     catchFn: (error) =>
       new UnexpectedError({
