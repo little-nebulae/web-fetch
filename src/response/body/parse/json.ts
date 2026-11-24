@@ -2,7 +2,7 @@ import type { AsyncResult } from "@little-nebulae/result";
 
 import { UnexpectedError, composeErrorMessage } from "@little-nebulae/error";
 import { JsonParseError, jsonParse } from "@little-nebulae/json";
-import { fail } from "@little-nebulae/result";
+import { createFailure } from "@little-nebulae/result";
 
 import type { WebBodyDecodingError } from "@/errors/body-decoding";
 import type { WebUsedBodyError } from "@/errors/used-body";
@@ -33,7 +33,7 @@ export async function webParseJsonResponseBody<T = unknown>({
   const operation = "parse JSON response body";
   const jsonParseError = jsonParseResult.error;
   if (jsonParseError.code === "JSON_PARSE_ERROR") {
-    return fail(
+    return createFailure(
       new JsonParseError({
         message: composeErrorMessage({
           operation,
@@ -44,7 +44,7 @@ export async function webParseJsonResponseBody<T = unknown>({
       }),
     );
   }
-  return fail(
+  return createFailure(
     new UnexpectedError({
       message: composeErrorMessage({ operation }),
       cause: jsonParseError.cause,
