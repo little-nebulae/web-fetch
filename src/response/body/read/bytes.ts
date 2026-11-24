@@ -1,6 +1,6 @@
 import { composeErrorMessage, UnexpectedError } from "@little-nebulae/error";
 import { HTTP_HEADER_ENUM } from "@little-nebulae/http";
-import { attemptAsync } from "@little-nebulae/result";
+import { produceAsyncResult } from "@little-nebulae/result";
 
 import { WebBodyDecodingError } from "@/errors/body-decoding";
 import { WebBodySizeTooLargeError } from "@/errors/body-size-too-large";
@@ -11,7 +11,7 @@ export async function webReadBytesResponseBody({
 }: {
   response: Response;
 }) {
-  return attemptAsync({
+  return produceAsyncResult({
     tryFn: () => response.bytes(),
     catchFn: (error) => {
       if (error instanceof TypeError) {
